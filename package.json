@@ -1,0 +1,10 @@
+{
+  "name": "practica4-integracion-continua",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Programa Hola mundo con una notificación de GitHub Actions a ntfy.",
+  "scripts": {
+    "start": "node hola-mundo.js",
+    "test": "node --check hola-mundo.js"
+  }
+}

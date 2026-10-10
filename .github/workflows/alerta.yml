@@ -1,0 +1,27 @@
+name: Alerta de integración continua
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  notificar:
+    name: Notificar a ntfy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Enviar notificación
+        env:
+          NTFY_TOPIC_URL: https://ntfy.sh/devops-itla
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          curl --fail-with-body \
+            --header "Title: Integración continua completada" \
+            --header "Tags: white_check_mark" \
+            --data "Push a main en ${{ github.repository }}: ${COMMIT_MESSAGE}" \
+            "$NTFY_TOPIC_URL"
